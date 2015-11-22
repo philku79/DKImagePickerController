@@ -294,8 +294,8 @@ public class DKCamera: UIViewController {
     
     // MARK: - Capture Session
     
-    private func beginSession() {
-        self.captureSession.sessionPreset = AVCaptureSessionPresetHigh
+    func beginSession(){
+        self.captureSession.sessionPreset = AVCaptureSessionPresetPhoto
         
         self.setupCurrentDevice()
         
@@ -309,6 +309,7 @@ public class DKCamera: UIViewController {
             height: max(UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.height))
         self.previewLayer?.anchorPoint = CGPointZero
         self.previewLayer?.position = CGPointZero
+        self.previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
         
         self.view.layer.insertSublayer(self.previewLayer!, atIndex: 0)
     }
@@ -522,31 +523,4 @@ private class DKCameraResource {
         return imageForResource("camera_switch")
     }
     
-}
-
-/**
- * Custom Implementation
- */
-
-extension DKCamera {
-
-    func beginSession(){
-        self.captureSession.sessionPreset = AVCaptureSessionPresetPhoto
-        
-        self.setupCurrentDevice()
-        
-        let stillImageOutput = AVCaptureStillImageOutput()
-        if self.captureSession.canAddOutput(stillImageOutput) {
-            self.captureSession.addOutput(stillImageOutput)
-        }
-        
-        self.previewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
-        self.previewLayer?.bounds.size = CGSize(width: min(UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.height),
-            height: max(UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.height))
-        self.previewLayer?.anchorPoint = CGPointZero
-        self.previewLayer?.position = CGPointZero
-        self.previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
-        
-        self.view.layer.insertSublayer(self.previewLayer!, atIndex: 0)
-    }
 }

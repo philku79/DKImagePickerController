@@ -278,7 +278,7 @@ public class DKImagePickerController: UINavigationController {
     }
     
     public override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.Portrait
+        return [UIInterfaceOrientationMask.Portrait,UIInterfaceOrientationMask.LandscapeLeft,UIInterfaceOrientationMask.LandscapeRight,UIInterfaceOrientationMask.PortraitUpsideDown]
     }
 
 }
@@ -297,26 +297,5 @@ internal extension UIViewController {
             }
         }
     }
-    
-}
-
-
-/**
-* Custom Implementation
-*/
-
-extension DKImagePickerController {
-    
-    // MARK: - Handles Orientation
-    // Überschreibt die POD-Componente, um Updatesafe zu sein.
-    
-    public override func shouldAutorotate() -> Bool {
-        return true
-    }
-    
-    public override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return [UIInterfaceOrientationMask.Portrait,UIInterfaceOrientationMask.LandscapeLeft,UIInterfaceOrientationMask.LandscapeRight,UIInterfaceOrientationMask.PortraitUpsideDown]
-    }
-    
     
 }
